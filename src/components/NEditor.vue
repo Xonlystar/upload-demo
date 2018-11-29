@@ -70,6 +70,7 @@ export default {
           setUploadData: function (file) {
             // 这里添加token
             getUploadToken(function (ossInfo) {
+              console.log(ossInfo)
               file.ossInfo = ossInfo
               return file
             }, file)

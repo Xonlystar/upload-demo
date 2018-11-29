@@ -212,7 +212,7 @@
     "@babel/helper-replace-supers" "^7.1.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
 
-"@babel/plugin-proposal-decorators@^7.0.0":
+"@babel/plugin-proposal-decorators@^7.1.0":
   version "7.1.6"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.1.6.tgz#460c31edbd01953efe45d491583b3ec31661d689"
   dependencies:
@@ -611,12 +611,12 @@
   version "10.12.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
 
-"@vue/babel-preset-app@^3.1.0":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@vue/babel-preset-app/-/babel-preset-app-3.1.1.tgz#1bb6395c5ddc84bc8e993ace47151b0d95d382a7"
+"@vue/babel-preset-app@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@vue/babel-preset-app/-/babel-preset-app-3.2.0.tgz#a443acdbd34f66d7645db271d9ac58fbe4fe870d"
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.0.0"
-    "@babel/plugin-proposal-decorators" "^7.0.0"
+    "@babel/plugin-proposal-decorators" "^7.1.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.0.0"
     "@babel/plugin-transform-runtime" "^7.0.0"
@@ -632,11 +632,11 @@
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-3.1.0.tgz#47db870055060c30189454919dbf9381be8695f2"
 
 "@vue/cli-plugin-babel@^3.1.2":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.1.1.tgz#443441456ea1141b3a8070255034342dd47809e0"
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-3.2.0.tgz#5548e052f07512156942f50dcf18948ad29be7ec"
   dependencies:
     "@babel/core" "^7.0.0"
-    "@vue/babel-preset-app" "^3.1.0"
+    "@vue/babel-preset-app" "^3.2.0"
     babel-loader "^8.0.4"
 
 "@vue/cli-plugin-eslint@^3.1.2":
@@ -5091,6 +5091,10 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
+plupload@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/plupload/-/plupload-2.3.6.tgz#2608acf735d5e8db83248724d78d81757bb43866"
+
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -6822,6 +6826,10 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+wangeditor@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/wangeditor/-/wangeditor-3.1.1.tgz#fbd3c1d4976923c9edebb85b29d30b35512ad039"
 
 watchpack@^1.5.0:
   version "1.6.0"

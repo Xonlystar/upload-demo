@@ -14,8 +14,10 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2": "^2.0.0-alpha.7",
+    "plupload": "^2.3.6",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "wangeditor": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.2",

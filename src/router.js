@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -8,18 +7,32 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      redirect: '/upload'
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "about" */ './views/login.vue')
     },
     {
-      path: '/ueditor',
-      name: 'ueditor',
-      component: () => import(/* webpackChunkName: "about" */ './views/UEditor.vue')
+      path: '/neditor',
+      name: 'neditor',
+      component: () => import(/* webpackChunkName: "about" */ './views/neditor.vue')
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: () => import(/* webpackChunkName: "about" */ './views/upload.vue')
+    },
+    {
+      path: '/selfUpload',
+      name: 'selfUpload',
+      component: () => import(/* webpackChunkName: "about" */ './views/selfUpload.vue')
+    },
+    {
+      path: '/wangeditor',
+      name: 'wangeditor',
+      component: () => import(/* webpackChunkName: "about" */ './views/wangeditor.vue')
     }
   ]
 })

@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/ueditor">ueditor</router-link>
+      <router-link to="/upload">upload</router-link> |
+      <router-link to="/selfUpload">selfUpload</router-link> |
+      <router-link to="/neditor">NEditor</router-link> |
+      <router-link to="/wangeditor">wangeditor</router-link>
     </div>
     <router-view/>
   </div>
