@@ -69,11 +69,10 @@ export default {
            */
           setUploadData: function (file) {
             // 这里添加token
-            console.log('获取token')
-            // getUploadToken(function (ossInfo) {
-            //   file.ossInfo = ossInfo
-            //   return file
-            // }, file)
+            getUploadToken(function (ossInfo) {
+              file.ossInfo = ossInfo
+              return file
+            }, file)
           },
           /**
            * 触发uploadBeforeSend事件时执行
@@ -85,6 +84,7 @@ export default {
            */
           setFormData: function (object, data, headers) {
             let ossInfo = object.file.ossInfo
+            console.log(ossInfo)
             let key = ossInfo.dir + '' + randomString(10) + getSuffix(data.name)
             data.key = key
             data.policy = ossInfo.policy
@@ -118,62 +118,6 @@ export default {
           },
           /* 指定上传接口返回的response中图片路径的字段，默认为 url */
           imageSrcField: 'url'
-        }
-      }
-      window.UEDITOR_CONFIG['videoUploadService'] = function (context, editor) {
-        return {
-          /**
-           * 触发fileQueued事件时执行
-           * 当文件被加入队列以后触发，用来设置上传相关的数据 (比如: url和自定义参数)
-           * @param {Object} file 当前选择的文件对象
-           */
-          setUploadData: function (file) {
-            // return file
-            // 这里添加token
-            getUploadToken(function (ossInfo) {
-              file.ossInfo = ossInfo
-              return file
-            }, file)
-          },
-          /**
-           * 触发uploadBeforeSend事件时执行
-           * 在文件上传之前触发，用来添加附带参数
-           * @param {Object} object 当前上传对象
-           * @param {Object} data 默认的上传参数，可以扩展此对象来控制上传参数
-           * @param {Object} headers 可以扩展此对象来控制上传头部
-           * @returns 上传参数对象
-           */
-          setFormData: function (object, data, headers) {
-            let ossInfo = object.file.ossInfo
-            let key = ossInfo.dir + '' + randomString(10) + getSuffix(data.name)
-            data.key = key
-            data.policy = ossInfo.policy
-            data.OSSAccessKeyId = ossInfo.OSSAccessKeyId
-            data.success_action_status = 200
-            data.signature = ossInfo.signature
-            context.videoUrl = ossInfo.host + '/' + key
-            return data
-          },
-          /**
-           * 触发startUpload事件时执行
-           * 当开始上传流程时触发，用来设置Uploader配置项
-           * @param {Object} uploader
-           * @returns uploader
-           */
-          setUploaderOptions: function (uploader) {
-            return uploader
-          },
-          /**
-           * 触发uploadSuccess事件时执行
-           * 当文件上传成功时触发
-           * @param {Object} res 上传接口返回的response
-           * @returns {Boolean} 上传接口返回的response成功状态条件 (比如: res.code == 200)
-           */
-          getResponseSuccess: function (res) {
-            return { url: context.videoUrl }
-          },
-          /* 指定上传接口返回的response中视频路径的字段，默认为 url */
-          videoSrcField: 'url'
         }
       }
     }

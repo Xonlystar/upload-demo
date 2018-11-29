@@ -18,14 +18,12 @@ module.exports = {
   configureWebpack: () => {},
   devServer: {
     proxy: {
-      '/admin': {
-        // 目标 API 地址
-        // target: 'https://shouzhan1-p-test.51fubei.com',
-        // target: 'https://shouzhan1-p-beta.51fubei.com',
-        target: 'https://shouzhan1-p.51fubei.com',
+      '/api': {
+        target: 'https://wisdombook-admin-test.wechatpark.com/api',
+        ws: true,
         changeOrigin: true,
         pathRewrite: {
-          '^/admin': '/admin'
+          '^/api': ''
         }
       }
     }

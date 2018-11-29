@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { storageGet } from './storage'
-
+import router from '../router'
 const axiosX = axios.create({
-  baseURL: process.env.API,
+  baseURL: 'api',
   timeout: 80000
 })
 /**
@@ -18,11 +17,23 @@ function checkStatus (response) {
 }
 
 /**
+ * 当请求成功时候，对于业务逻辑做判断
+ * @param res 请求成功后返回的接口数据
+ * @returns {*}
+ */
+function checkCode (res) {
+  if (res.success) {
+    return true
+  }
+  // 请求成功，但是业务逻辑出错情况下，给出对应提示
+  codeErrorHandle(res.errorMsg)
+}
+/**
  * 当请求成功，但是出现了业务层面错误时候，给出对应的错误处理
  * @param res 返回的信息
  */
 function codeErrorHandle (msg) {
-  console.error(msg)
+  console.log(msg)
 }
 
 axiosX.interceptors.request.use(function (config) {
@@ -37,20 +48,8 @@ axiosX.interceptors.request.use(function (config) {
 axiosX.interceptors.response.use(function (response) {
   let res = checkStatus(response)
   if (res) {
-    if (res.code === 200) {
-      return res
-    } else if (res.code === 201) {
-      // 请求成功，但是业务逻辑出错情况下，给出对应提示
-      codeErrorHandle(res.msg)
-      return Promise.reject(res)
-    } else if (res.code === 202) {
-      // session 过期
-      codeErrorHandle(res.msg)
-      window.sessionStorage.clear()
-      setTimeout(function () {
-        window.location = '/login'
-      }, 1000)
-      return Promise.reject(res)
+    if (checkCode(res)) {
+      return res.data
     }
   }
 }, function (err) {
@@ -98,29 +97,15 @@ axiosX.interceptors.response.use(function (response) {
   } else {
     err.message = '登录超时，请重新登录'
     window.sessionStorage.clear()
-    setTimeout(function () {
-      window.location.reload()
-    }, 1000)
+    router.push('/login')
   }
-  console.error(err)
+  console.log(err.message)
   return Promise.reject(err)
 })
 
-const XHR = ({
-  method = 'post',
-  qs = true,
-  loading = false,
-  loginRequire = true,
-  reqComplex = false,
-  reqContentType = 'urlencoded'
-}) => {
+const XHR = ({method = 'post', qs = true, loading = false, loginRequire = true, reqComplex = false, reqContentType = 'urlencoded'}) => {
   // 用户登陆信息
-  const userInfo = storageGet('userInfo')
-  let user = null
-  if (userInfo) {
-    user = {
-      access_token: userInfo.access_token
-    }
+  const user = {
   }
 
   // 带请求进度条成功方法
@@ -135,11 +120,11 @@ const XHR = ({
 
   // 带请求进度条失败方法
   const errFunX = err => {
-    return Promise.reject(err)
+    console.log(err)
   }
   // 失败执行访求
   const errFunC = err => {
-    return Promise.reject(err)
+    console.log(err)
   }
 
   // 判断是否需要Longing
@@ -148,33 +133,33 @@ const XHR = ({
   // 判断是否需要Longing
   const errFun = loading ? errFunX : errFunC
 
-  return { user, sucFun, errFun }
+  return {user, sucFun, errFun}
 }
 
 // 简单带请求带状态POST
 // Posting('/fsddf', {id: 111, page: 1})
 const Posting = function (url = '', data = {}) {
-  let { user, sucFun, errFun } = XHR({ loading: true })
-  // let reqData = qs.stringify({ ...user, ...data })
-  let reqData = { ...user, ...data }
+  let {user, sucFun, errFun} = XHR({loading: true})
+  // let reqData = qs.stringify({...user, ...data})
+  let reqData = {...user, ...data}
   return axiosX.post(url, reqData).then(sucFun).catch(errFun)
 }
 
 // 简单带请求POST
 // Post('/fsddf', {id: 111, page: 1})
 const Post = function (url = '', data = {}) {
-  let { user, sucFun, errFun } = XHR({ loading: false })
-  // let reqData = qs.stringify({ ...user, ...data })
-  let reqData = { ...user, ...data }
+  let {user, sucFun, errFun} = XHR({loading: false})
+  // let reqData = qs.stringify({...user, ...data})
+  let reqData = {...user, ...data}
   return axiosX.post(url, reqData).then(sucFun).catch(errFun)
 }
 
 // 简单带请求带状态Get
 // Geting('/fsddf', {id: 111, page: 1})
 const Geting = function (url = '', data = {}) {
-  let { user, sucFun, errFun } = XHR({ loading: true })
+  let {user, sucFun, errFun} = XHR({loading: true})
   let params = {
-    params: { ...user, ...data }
+    params: {...user, ...data}
   }
   return axiosX.get(url, params).then(sucFun).catch(errFun)
 }
@@ -182,7 +167,7 @@ const Geting = function (url = '', data = {}) {
 // 简单带请求GET
 // Get('/fsddf', {id: 111, page: 1})
 const Get = function (url = '', data = {}) {
-  let { user, sucFun, errFun } = XHR({ loading: false })
+  let { user, sucFun, errFun } = XHR({loading: false})
   let params = {
     params: { ...user, ...data }
   }
@@ -205,7 +190,7 @@ Vue.Geting = Geting
 Vue.prototype.$Post = Post
 Vue.Post = Post
 
-// 无等待状态GET请求
+// 无等待状态GETt请求
 Vue.prototype.$Get = Get
 Vue.Get = Get
 
